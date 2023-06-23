@@ -18,6 +18,7 @@ const userSchema = new Schema(
        // regex could search for pattern like: abs3$@gmailcom
       match: [/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, 'Please enter a valid email address']
     },
+    // references the entire Thought model
     thoughts: [{
       type: Schema.Types.ObjectId,
       ref: 'Thought'
@@ -34,6 +35,10 @@ const userSchema = new Schema(
     },
   }
 );
+
+userSchema.methods.populateFriends = function () {
+  return this.populate('friends', 'username').execPopulate();
+};
 
 // retrieves length of the users friends array.
 userSchema.virtual('friendCount').get(function () {
