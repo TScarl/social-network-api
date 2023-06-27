@@ -80,7 +80,7 @@ const deleteUser = ('/:userId', async (req, res) => {
   }
 });
 
-// bonus: remove a users associated thoughts when deleted
+// bonus: remove a users associated thoughts when deleted... shouldn't be a separate controller...
 const deleteAssociatedThoughts = ('/delete/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
@@ -144,7 +144,7 @@ const addFriend = ('/:userId/friends/:friendId', async (req, res) => {
         return res.status(404).json({ message: "User not found" })
       }
 
-      res.status(200).json({ message: "friend deleted, permanently!" });
+      res.status(200).json({ message: "Friend deleted, permanently!" });
     } catch (err) {
       console.error(err);
       res.status(404).json({ message: "Failed to remove friend" });

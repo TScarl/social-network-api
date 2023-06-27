@@ -3,7 +3,7 @@ const users = [
     username: 'John Doe',
     email: 'johndoe@example.com',
     thoughts: [],
-    friends: []
+    friends: ["649a6a8789b87e4699987024", "649a6a8789b87e4699987026"]
   },
   {
     username: 'Jane Anderson',
