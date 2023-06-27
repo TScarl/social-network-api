@@ -1,11 +1,12 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 const userData = require('./userData');
+const thoughtData = require('./thoughtData');
 const mongoose = require('mongoose');
 
 console.time('seeding');
 
 // MongoDB connection URI
-const uri = 'mongodb://localhost/mydatabase';
+const uri = 'mongodb://127.0.0.1:27017/social-network';
 
 // Creates a connection to MongoDB
 const seedDatabase = async () => {
@@ -16,6 +17,7 @@ const seedDatabase = async () => {
     });
 
     await User.deleteMany({});
+    await Thought.deleteMany({});
 
     // Create users
     for (const userObj of userData) {
@@ -23,7 +25,12 @@ const seedDatabase = async () => {
       console.log(`User created with ID: ${user._id}`);
     }
 
-    console.log('Users seeding completed successfully.');
+    for (const thoughtObj of thoughtData) {
+      const thought = await Thought.create(thoughtObj);
+      console.log(`Thought created with ID: ${thought._id}`);
+    }
+
+    console.log('Seeding completed successfully.');
   } catch (error) {
     console.error('Seeding error:', error);
   } finally {
